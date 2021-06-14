@@ -35,6 +35,7 @@ func New(url string) (Client, error) {
 	return &client{Connection: conn, Kit: kit}, nil
 }
 
+// Get the balance of all tokens including native currency token
 func (c *client) Balance(address string) (*celotoken.Balance, error) {
 	return c.Kit.Balance(address)
 }

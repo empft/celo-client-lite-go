@@ -38,6 +38,14 @@ func New(url string) (*Client, error) {
 	}, nil
 }
 
+func (c *Client) LatestBlock() (*big.Int, error) {
+	header, err := c.Eth.HeaderByNumber(context.Background(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return header.Number, nil
+}
 
 
 func (c *Client) Balance(address string) (*big.Int, error) {

@@ -1,6 +1,7 @@
 package celoclient
 
 import (
+	"math/big"
 	"time"
 
 	"github.com/celo-org/celo-blockchain/common"
@@ -14,6 +15,7 @@ type Client interface {
 	Balance(string) (*celotoken.Balance, error)
 	SendRawTransaction(string) (common.Hash, error)
 	WaitForTransaction(common.Hash, time.Duration) (*types.Receipt, error)
+	LatestBlock() (*big.Int, error)
 }
 
 type client struct {
@@ -48,5 +50,8 @@ func (c *client) SendRawTransaction(rawTx string) (common.Hash, error) {
 // Wait for the transaction to complete by polling the blockchain every 500ms
 func (c *client) WaitForTransaction(txHash common.Hash, timeout time.Duration) (*types.Receipt, error) {
 	return c.Connection.WaitForTransaction(txHash, timeout)
+}
+func (c *client) LatestBlock() (*big.Int, error) {
+	return c.Connection.LatestBlock()
 }
 

@@ -14,7 +14,6 @@ const (
 )
 
 type BalanceMap map[CeloToken]*big.Int
-
 type Balance struct {
 	CELO *big.Int
 	CUSD *big.Int

@@ -40,10 +40,12 @@ func (c *client) Balance(address string) (*celotoken.Balance, error) {
 	return c.Kit.Balance(address)
 }
 
+// Send hex encoded signed transaction payload and returns the hash
 func (c *client) SendRawTransaction(rawTx string) (common.Hash, error) {
 	return c.Connection.SendRawTransaction(rawTx)
 }
 
+// Wait for the transaction to complete by polling the blockchain every 500ms
 func (c *client) WaitForTransaction(txHash common.Hash, timeout time.Duration) (*types.Receipt, error) {
 	return c.Connection.WaitForTransaction(txHash, timeout)
 }
